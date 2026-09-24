@@ -1,20 +1,33 @@
 import clsx from 'clsx';
 import * as React from 'react';
+import { FaJava } from 'react-icons/fa';
 import { IoLogoVercel } from 'react-icons/io5';
 import {
+  SiAndroid,
   SiFirebase,
   SiGit,
   SiGoogleanalytics,
+  SiGooglemaps,
+  SiGraphql,
   SiJavascript,
+  SiJenkins,
+  SiJetpackcompose,
+  SiJson,
+  SiKotlin,
   SiMarkdown,
   SiMongodb,
   SiNextdotjs,
   SiNodedotjs,
   SiNotion,
+  SiOkta,
   SiPrettier,
+  SiPython,
   SiReact,
+  SiReactivex,
   SiRedux,
   SiSass,
+  SiSpringboot,
+  SiSqlite,
   SiSwift,
   SiTailwindcss,
   SiTypescript,
@@ -116,5 +129,57 @@ const techList = {
   swift: {
     icon: SiSwift,
     name: 'Swift',
+  },
+  kotlin: {
+    icon: SiKotlin,
+    name: 'Kotlin',
+  },
+  java: {
+    icon: FaJava,
+    name: 'Java',
+  },
+  android: {
+    icon: SiAndroid,
+    name: 'Android',
+  },
+  compose: {
+    icon: SiJetpackcompose,
+    name: 'Jetpack Compose',
+  },
+  python: {
+    icon: SiPython,
+    name: 'Python',
+  },
+  springboot: {
+    icon: SiSpringboot,
+    name: 'Spring Boot',
+  },
+  graphql: {
+    icon: SiGraphql,
+    name: 'GraphQL',
+  },
+  rxjava: {
+    icon: SiReactivex,
+    name: 'RxJava',
+  },
+  sqlite: {
+    icon: SiSqlite,
+    name: 'SQLite',
+  },
+  json: {
+    icon: SiJson,
+    name: 'JSON',
+  },
+  googlemaps: {
+    icon: SiGooglemaps,
+    name: 'Google Maps API',
+  },
+  okta: {
+    icon: SiOkta,
+    name: 'Okta',
+  },
+  jenkins: {
+    icon: SiJenkins,
+    name: 'Jenkins',
   },
 };

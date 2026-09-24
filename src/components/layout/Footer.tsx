@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FiMail } from 'react-icons/fi';
+import { FaLinkedin } from 'react-icons/fa';
 import { IconType } from 'react-icons/lib';
-import { SiBluesky, SiGithub, SiLinkedin, SiX } from 'react-icons/si';
 
 import { trackEvent } from '@/lib/analytics';
 import useCopyToClipboard from '@/hooks/useCopyToClipboard';
@@ -17,40 +17,18 @@ export default function Footer() {
   return (
     <footer className='mt-4 pb-2'>
       <main className='layout flex flex-col items-center border-t pt-6 dark:border-gray-600'>
-        <FooterLinks />
+        {spotifyFlag && <Spotify className='mb-8' />}
 
-        {spotifyFlag && <Spotify className='mt-8' />}
-
-        <p className='mt-12 font-medium text-gray-600 dark:text-gray-300'>
+        <p className='font-medium text-gray-600 dark:text-gray-300'>
           Reach me out
         </p>
         <SocialLinks />
 
         <p className='mt-8 text-sm text-gray-600 dark:text-gray-300'>
-          © Theodorus Clarence {new Date().getFullYear()}
+          © Abidullah Bin Junaid {new Date().getFullYear()}
         </p>
       </main>
     </footer>
-  );
-}
-
-function FooterLinks() {
-  return (
-    <div className='flex flex-wrap justify-center gap-x-8 gap-y-4'>
-      {footerLinks.map(({ href, text, tooltip }) => (
-        <Tooltip interactive={false} key={href} tipChildren={tooltip}>
-          <UnstyledLink
-            className='animated-underline rounded-sm text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-primary-300 dark:text-gray-200'
-            href={href}
-            onClick={() => {
-              trackEvent(`Footer Link: ${text}`, { type: 'link' });
-            }}
-          >
-            {text}
-          </UnstyledLink>
-        </Tooltip>
-      ))}
-    </div>
   );
 }
 
@@ -72,14 +50,14 @@ function SocialLinks() {
                 ? 'Click the mail logo to copy'
                 : 'Copied to clipboard 🥳'}
               <Accent className='inline-block font-medium'>
-                me@theodorusclarence.com
+                abjwork26@gmail.com
               </Accent>
             </div>
           }
         >
           <button
             onClick={() => {
-              copy('me@theodorusclarence.com').then(() => {
+              copy('abjwork26@gmail.com').then(() => {
                 setCopyStatus('copied');
                 setTimeout(() => setCopyStatus('idle'), 1500);
               });
@@ -90,85 +68,29 @@ function SocialLinks() {
           </button>
         </Tooltip>
       </div>
-      {socials.map((social) => (
-        <Tooltip
-          interactive={false}
-          key={social.href}
-          tipChildren={social.text}
-        >
-          <UnstyledLink
-            className='inline-flex items-center justify-center rounded-sm focus:outline-none focus-visible:ring focus-visible:ring-primary-300'
-            href={social.href}
-            onClick={() => {
-              trackEvent(`Footer Link: ${social.id}`, { type: 'link' });
-            }}
+      {socials.map((social) => {
+        const Icon = social.icon;
+        return (
+          <Tooltip
+            interactive={false}
+            key={social.href}
+            tipChildren={social.text}
           >
-            <social.icon className='my-auto h-6 w-6 align-middle text-gray-600 transition-colors hover:text-primary-300 dark:text-gray-300 dark:hover:text-primary-300' />
-          </UnstyledLink>
-        </Tooltip>
-      ))}
+            <UnstyledLink
+              className='inline-flex items-center justify-center rounded-sm focus:outline-none focus-visible:ring focus-visible:ring-primary-300'
+              href={social.href}
+              onClick={() => {
+                trackEvent(`Footer Link: ${social.id}`, { type: 'link' });
+              }}
+            >
+              <Icon className='my-auto h-6 w-6 align-middle text-gray-600 transition-colors hover:text-primary-300 dark:text-gray-300 dark:hover:text-primary-300' />
+            </UnstyledLink>
+          </Tooltip>
+        );
+      })}
     </div>
   );
 }
-
-const footerLinks: { href: string; text: string; tooltip: React.ReactNode }[] =
-  [
-    {
-      href: 'https://github.com/theodorusclarence/theodorusclarence.com',
-      text: 'Source Code',
-      tooltip: (
-        <>
-          This website is <strong>open source</strong>!
-        </>
-      ),
-    },
-    {
-      href: '/design',
-      text: 'Design',
-      tooltip: 'theodorusclarence.com color palette',
-    },
-    {
-      href: 'https://clarence.link/docs',
-      text: 'Docs',
-      tooltip: 'Personal documentation about my best practices on development',
-    },
-    {
-      href: 'https://clarence.link/booknotes',
-      text: 'Book Notes',
-      tooltip: 'Note collection of books that I read',
-    },
-    {
-      href: 'https://clarence.link/starters',
-      text: 'Starter Templates',
-      tooltip: 'Starter that I build and use throughout my projects',
-    },
-    {
-      href: 'https://clarence.link/um',
-      text: 'Analytics',
-      tooltip: 'theodorusclarence.com views and visitors analytics',
-    },
-    {
-      href: '/statistics',
-      text: 'Statistics',
-      tooltip: 'Blog, Projects, and Library Statistics',
-    },
-    {
-      href: '/guestbook',
-      text: 'Guestbook',
-      tooltip:
-        'Leave whatever you like to say—message, appreciation, suggestions',
-    },
-    {
-      href: '/subscribe',
-      text: 'Subscribe',
-      tooltip: 'Get an email whenever I post, no spam',
-    },
-    {
-      href: 'https://theodorusclarence.com/rss.xml',
-      text: 'RSS',
-      tooltip: 'Add theodorusclarence.com blog to your feeds',
-    },
-  ];
 
 type Social = {
   href: string;
@@ -178,40 +100,13 @@ type Social = {
 };
 const socials: Social[] = [
   {
-    href: 'https://clarence.link/github',
-    icon: SiGithub,
-    id: 'Github',
-    text: (
-      <>
-        See my projects on <Accent className='font-medium'>Github</Accent>
-      </>
-    ),
-  },
-  {
-    href: 'https://clarence.link/linkedin',
-    icon: SiLinkedin,
+    href: 'https://www.linkedin.com/in/abidullah-bin-junaid/',
+    icon: FaLinkedin,
     id: 'Linkedin',
     text: (
       <>
         Find me on <Accent className='font-medium'>Linkedin</Accent>
       </>
     ),
-  },
-  {
-    href: 'https://clarence.link/twt',
-    icon: SiX,
-    id: 'X',
-    text: (
-      <>
-        I post updates, tips, insight, and sometimes do some talk. Follow me on{' '}
-        <Accent className='font-medium'>X</Accent>!
-      </>
-    ),
-  },
-  {
-    href: 'https://clarence.link/bsky',
-    icon: SiBluesky,
-    id: 'Bluesky',
-    text: <>Trying out Bluesky! Will be posting the same update as X.</>,
   },
 ];

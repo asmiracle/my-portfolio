@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import { InferGetStaticPropsType } from 'next';
 import * as React from 'react';
+import { HiOutlineAcademicCap } from 'react-icons/hi';
 import { IoArrowDownOutline } from 'react-icons/io5';
 import { IoNewspaperSharp } from 'react-icons/io5';
-import { SiBluesky, SiGithub, SiX } from 'react-icons/si';
+import { SiBluesky, SiGithub, SiIeee, SiX } from 'react-icons/si';
+import { FaLinkedin } from "react-icons/fa";
 import { InView } from 'react-intersection-observer';
 
 import { trackEvent } from '@/lib/analytics';
@@ -14,7 +16,6 @@ import useLoaded from '@/hooks/useLoaded';
 
 import Accent from '@/components/Accent';
 import BlogCard from '@/components/content/blog/BlogCard';
-import ShortsCard from '@/components/content/card/ShortsCard';
 import ProjectCard from '@/components/content/projects/ProjectCard';
 import Layout from '@/components/layout/Layout';
 import ButtonLink from '@/components/links/ButtonLink';
@@ -23,17 +24,20 @@ import UnstyledLink from '@/components/links/UnstyledLink';
 import Seo from '@/components/Seo';
 import TC from '@/components/TC';
 import Tooltip from '@/components/Tooltip';
+import SkillBadge from '@/components/SkillBadge';
+
+import { certifications } from '@/constants/certifications';
+import { publications } from '@/constants/publications';
+import { featuredSkills } from '@/constants/skills';
 
 export default function IndexPage({
   featuredPosts,
   featuredProjects,
-  featuredShorts,
   introPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const populatedPosts = useInjectContentMeta('blog', featuredPosts);
   const populatedIntro = useInjectContentMeta('blog', introPosts);
   const populatedProjects = useInjectContentMeta('projects', featuredProjects);
-  const populatedShorts = useInjectContentMeta('library', featuredShorts);
 
   const isLoaded = useLoaded();
 
@@ -56,7 +60,7 @@ export default function IndexPage({
               className='mt-1 text-3xl md:text-5xl 2xl:text-6xl'
               data-fade='2'
             >
-              You can call me <Accent>Clarence</Accent>
+              You can call me <Accent>Abidullah</Accent>
             </h1>
             <p
               className='mt-2 max-w-4xl leading-relaxed text-gray-700 dark:text-gray-200 md:mt-3 text-sm md:text-base 2xl:text-lg'
@@ -65,9 +69,9 @@ export default function IndexPage({
                 trackEvent('Social Link: Dimension', { type: 'link' });
               }}
             >
-              Front-end Engineer at{' '}
-              <CustomLink href='https://dimension.dev/?ref=theodorusclarence.com'>
-                Dimension
+              Sr Android Engineer at{' '}
+              <CustomLink href='https://www.meta.com/about/'>
+                Meta
               </CustomLink>
             </p>
             <p
@@ -77,22 +81,15 @@ export default function IndexPage({
               )}
               data-fade='3'
             >
-              I work with React Ecosystem, and write to teach people how to
-              rebuild and redefine fundamental concepts through mental models.
+              Senior Software Engineer with 10 years of experience building Android and full-stack applications (Kotlin, Java, Python, Spring Boot, React) at Meta, FedEx, Cigna, AT&T, Samsung, and Verizon.
+              MS in Computer Science (Kent State) and MBA, with a published IEEE paper on recommender systems and experience evaluating and authoring AI model training tasks.
             </p>
 
-            <p
-              className='mt-3 max-w-4xl leading-relaxed text-gray-700 dark:text-gray-200 md:mt-4 md:text-lg 2xl:text-xl'
-              data-fade='4'
-            >
-              Don't forget to sign my{' '}
-              <CustomLink href='/guestbook'>guestbook</CustomLink>!
-            </p>
             <div
               data-fade='5'
               className='mt-8 flex flex-wrap gap-4 md:!text-lg'
             >
-              <div className='group relative'>
+              {/* <div className='group relative'>
                 <div
                   className={clsx(
                     'absolute -inset-0.5 animate-tilt rounded blur',
@@ -102,7 +99,7 @@ export default function IndexPage({
                   )}
                 />
                 <ButtonLink href='#intro'>Read the blog</ButtonLink>
-              </div>
+              </div> */}
               <ButtonLink href='/about'>Learn more about me</ButtonLink>
             </div>
             <div
@@ -110,7 +107,7 @@ export default function IndexPage({
               className='mt-4 flex flex-wrap gap-4 gap-y-2 md:mt-8'
             >
               <UnstyledLink
-                href='https://clarence.link/cv'
+                href='https://drive.google.com/file/d/1Ss4M5aqID32pFZOlMsGZpuVmcZXNhFZ9/view?usp=sharing'
                 className={clsx(
                   'inline-flex items-center gap-1 text-sm font-medium md:text-base',
                   'text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
@@ -124,7 +121,7 @@ export default function IndexPage({
                 <IoNewspaperSharp className='shrink-0' />
                 <span>Resume</span>
               </UnstyledLink>
-              <UnstyledLink
+              {/* <UnstyledLink
                 href='https://twitter.com/th_clarence'
                 className={clsx(
                   'inline-flex items-center gap-1 text-sm font-medium md:text-base',
@@ -153,9 +150,9 @@ export default function IndexPage({
               >
                 <SiBluesky className='shrink-0 transition-colors group-hover:text-[#0285FF]' />
                 <span>@theodorusclarence.com</span>
-              </UnstyledLink>
+              </UnstyledLink> */}
               <UnstyledLink
-                href='https://github.com/theodorusclarence'
+                href='https://www.linkedin.com/in/abidullah-bin-junaid/'
                 className={clsx(
                   'inline-flex items-center gap-1 text-sm font-medium md:text-base',
                   'text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
@@ -163,11 +160,11 @@ export default function IndexPage({
                   'transition-colors'
                 )}
                 onClick={() => {
-                  trackEvent('Social Link: Github', { type: 'link' });
+                  trackEvent('Social Link: LinkedIn', { type: 'link' });
                 }}
               >
-                <SiGithub className='shrink-0' />
-                <span>theodorusclarence</span>
+                <FaLinkedin className='shrink-0' />
+                <span>abidullah-bin-junaid</span>
               </UnstyledLink>
             </div>
           </article>
@@ -192,6 +189,39 @@ export default function IndexPage({
         </section>
 
         <InView triggerOnce rootMargin='-40% 0px'>
+          {({ ref, inView }) => (
+            <section
+              ref={ref}
+              id='intro'
+              className={clsx('py-20', inView && 'fade-in-start')}
+            >
+              <article className='layout' data-fade='0'>
+                <h2 className='text-2xl md:text-4xl' id='skills'>
+                  <Accent>Skills</Accent>
+                </h2>
+                <p className='mt-2 text-gray-600 dark:text-gray-300'>
+                  Technologies and tools I use most often
+                </p>
+                <ul className='mt-4 flex flex-wrap gap-2 md:gap-3'>
+                  {featuredSkills.map((skill) => (
+                    <SkillBadge key={skill.name} skill={skill} />
+                  ))}
+                </ul>
+                <ButtonLink
+                  className='mt-6'
+                  href='/skills'
+                  onClick={() =>
+                    trackEvent('Home: See all skills', { type: 'navigate' })
+                  }
+                >
+                  See all skills
+                </ButtonLink>
+              </article>
+            </section>
+          )}
+        </InView>
+
+        {/* <InView triggerOnce rootMargin='-40% 0px'>
           {({ ref, inView }) => (
             <section
               ref={ref}
@@ -291,7 +321,7 @@ export default function IndexPage({
               </article>
             </section>
           )}
-        </InView>
+        </InView> */}
 
         <InView triggerOnce rootMargin='-40% 0px'>
           {({ ref, inView }) => (
@@ -336,31 +366,87 @@ export default function IndexPage({
               className={clsx('py-20', inView && 'fade-in-start')}
             >
               <article className='layout' data-fade='0'>
-                <h2 className='text-2xl md:text-4xl' id='library'>
-                  <Accent>Shorts</Accent>
+                <h2 className='text-2xl md:text-4xl' id='publications'>
+                  <Accent>Publication</Accent>
                 </h2>
                 <p className='mt-2 text-gray-600 dark:text-gray-300'>
-                  Short article that's not long enough to be a blog post,
-                  usually comes from my personal notes.
+                  Research I have published
                 </p>
-                <ul className='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
-                  {populatedShorts.map((short, i) => (
-                    <ShortsCard
-                      key={short.slug}
-                      short={short}
-                      className={clsx(i > 2 && 'hidden sm:block')}
-                    />
+                <ul className='mt-4 grid gap-4'>
+                  {publications.map((pub) => (
+                    <li
+                      key={pub.href}
+                      className={clsx(
+                        'rounded-md border dark:border-gray-600',
+                        'scale-100 hover:scale-[1.01] active:scale-[0.99] motion-safe:transform-gpu',
+                        'transition duration-100 motion-reduce:hover:scale-100',
+                        'animate-shadow'
+                      )}
+                    >
+                      <UnstyledLink
+                        href={pub.href}
+                        className='flex h-full flex-col items-start gap-2 rounded-md p-4 focus:outline-none focus-visible:ring focus-visible:ring-primary-300 md:flex-row md:items-center'
+                        onClick={() =>
+                          trackEvent(`Home: Publication ${pub.title}`, {
+                            type: 'link',
+                          })
+                        }
+                      >
+                        <SiIeee className='shrink-0 text-3xl text-gray-700 dark:text-gray-200 md:mr-2 md:text-4xl' />
+                        <div className='flex-1'>
+                          <h4>{pub.title}</h4>
+                          <p className='mt-1 text-sm text-gray-700 dark:text-gray-300'>
+                            {pub.authors} · {pub.year}
+                          </p>
+                          <p className='text-sm text-gray-600 dark:text-gray-400'>
+                            {pub.venue}
+                            {pub.isbn && ` · ISBN ${pub.isbn}`}
+                          </p>
+                        </div>
+                        <p className='animated-underline inline-block font-medium'>
+                          Read paper →
+                        </p>
+                      </UnstyledLink>
+                    </li>
                   ))}
                 </ul>
-                <ButtonLink
-                  className='mt-4'
-                  href='/shorts'
-                  onClick={() =>
-                    trackEvent('Home: See more shorts', { type: 'navigate' })
-                  }
-                >
-                  See more shorts
-                </ButtonLink>
+              </article>
+            </section>
+          )}
+        </InView>
+
+        <InView triggerOnce rootMargin='-40% 0px'>
+          {({ ref, inView }) => (
+            <section
+              ref={ref}
+              className={clsx('py-20', inView && 'fade-in-start')}
+            >
+              <article className='layout' data-fade='0'>
+                <h2 className='text-2xl md:text-4xl' id='certifications'>
+                  <Accent>Certifications &amp; Training</Accent>
+                </h2>
+                <p className='mt-2 text-gray-600 dark:text-gray-300'>
+                  Courses and training I have completed
+                </p>
+                <ul className='mt-4 grid gap-4 sm:grid-cols-2'>
+                  {certifications.map((cert) => (
+                    <li
+                      key={cert.title}
+                      className='flex items-start gap-3 rounded-md border p-4 dark:border-gray-600'
+                    >
+                      <HiOutlineAcademicCap className='mt-0.5 shrink-0 text-2xl text-primary-500 dark:text-primary-300' />
+                      <div>
+                        <h4>{cert.title}</h4>
+                        <p className='mt-1 text-sm text-gray-700 dark:text-gray-300'>
+                          {cert.issuer}
+                        </p>
+                        <p className='mt-1 text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400'>
+                          {cert.type}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </article>
             </section>
           )}
@@ -375,7 +461,6 @@ export async function getStaticProps() {
 
   const blogs = await getAllFilesFrontmatter('blog');
   const projects = await getAllFilesFrontmatter('projects');
-  const shorts = await getAllFilesFrontmatter('library');
 
   const featuredPosts = getFeatured(blogs, [
     'gradient-border-is-hard',
@@ -386,17 +471,12 @@ export async function getStaticProps() {
     'nextjs-fetch-method',
   ]);
   const featuredProjects = getFeatured(projects, [
-    'hexcape',
-    'notiolink',
-    'ppdbsumsel',
-  ]);
-  const featuredShorts = getFeatured(shorts, [
-    'react/absolute-import',
-    'auth-context',
-    'mac/zsh',
-    'react/jsx-one-parent',
-    'styling/margin-usage',
-    'uncategorized/search-removal',
+    'fedex',
+    'cigna-accredo',
+    'heb',
+    'marriott-vacation-club',
+    'zenkey',
+    'healthinfo',
   ]);
 
   const introPosts = getFeatured(blogs, [
@@ -408,7 +488,6 @@ export async function getStaticProps() {
     props: {
       featuredPosts,
       featuredProjects,
-      featuredShorts,
       introPosts,
     },
   };

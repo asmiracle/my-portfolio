@@ -1,15 +1,16 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { openGraph } from '@/lib/helper.client';
+/** Deployed site origin, e.g. https://example.com (no trailing slash) */
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? '').replace(/\/$/, '');
 
 const defaultMeta = {
-  title: 'Theodorus Clarence',
-  siteName: 'theodorusclarence.com',
+  title: 'Abidullah Bin Junaid',
+  siteName: 'Abidullah Bin Junaid',
   description:
-    'An online portfolio and blog by Theodorus Clarence. Showcase of my projects, and some of my thoughts about website development.',
-  url: 'https://theodorusclarence.com',
-  image: 'https://theodorusclarence.com/favicon/large-og.jpg',
+    'Portfolio of Abidullah Bin Junaid, Senior Android Engineer at Meta. Android and full-stack projects, skills, and experience.',
+  url: siteUrl,
+  image: `${siteUrl}/favicon/large-og.jpg`,
   type: 'website',
   robots: 'follow, index',
 };
@@ -33,17 +34,6 @@ export default function Seo(props: SeoProps) {
     ? `${props.templateTitle} | ${meta.siteName}`
     : meta.title;
 
-  // Use siteName if there is templateTitle
-  // but show full title if there is none
-  meta.image = openGraph({
-    description: meta.description,
-    siteName: props.templateTitle ? meta.siteName : meta.title,
-    templateTitle: props.templateTitle,
-    banner: props.banner,
-    isBlog: props.isBlog,
-    tags: props.tags,
-  });
-
   return (
     <Head>
       <title>{meta.title}</title>
@@ -62,7 +52,6 @@ export default function Seo(props: SeoProps) {
       <meta name='image' property='og:image' content={meta.image} />
       {/* Twitter */}
       <meta name='twitter:card' content='summary_large_image' />
-      <meta name='twitter:site' content='@th_clarence' />
       <meta name='twitter:title' content={meta.title} />
       <meta name='twitter:description' content={meta.description} />
       <meta name='twitter:image' content={meta.image} />
@@ -77,7 +66,7 @@ export default function Seo(props: SeoProps) {
           <meta
             name='author'
             property='article:author'
-            content='Theodorus Clarence'
+            content='Abidullah Bin Junaid'
           />
         </>
       )}
@@ -94,7 +83,7 @@ export default function Seo(props: SeoProps) {
               author: [
                 {
                   '@type': 'Person',
-                  name: 'Theodorus Clarence',
+                  name: 'Abidullah Bin Junaid',
                 },
               ],
               image: meta.image,

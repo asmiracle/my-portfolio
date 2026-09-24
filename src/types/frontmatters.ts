@@ -50,7 +50,7 @@ export type ProjectFrontmatter = {
   description: string;
   category?: string;
   techs: string;
-  banner: string;
+  banner?: string;
   link?: string;
   github?: string;
   youtube?: string;
