@@ -44,9 +44,8 @@ import {
   SiSubversion,
   SiSwift,
   SiXcode,
-  SiXml,
 } from 'react-icons/si';
-import { TbBrandCSharp } from 'react-icons/tb';
+import { TbBrandCSharp, TbFileTypeXml } from 'react-icons/tb';
 
 export type Skill = {
   name: string;
@@ -134,7 +133,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'GraphQL', icon: SiGraphql },
       { name: 'SOAP' },
       { name: 'JSON', icon: SiJson },
-      { name: 'XML / XMLPullParser', icon: SiXml },
+      { name: 'XML / XMLPullParser', icon: TbFileTypeXml },
       { name: 'Third-party APIs (Twitter, Facebook, Google)' },
     ],
   },
