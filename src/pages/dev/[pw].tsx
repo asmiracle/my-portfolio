@@ -91,8 +91,11 @@ export default function UmamiPage() {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const pw = process.env.ADMIN_PASSWORD;
+
+  // Skip generating the hidden dev page when no password is configured
   return {
-    paths: [{ params: { pw: process.env.ADMIN_PASSWORD } }],
+    paths: pw ? [{ params: { pw } }] : [],
     fallback: false,
   };
 };

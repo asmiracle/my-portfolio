@@ -34,6 +34,8 @@ export default function CloudinaryVideoPlayer({
         ])}
         logo={false}
         src={publicId}
+        // Same cloud as CloudinaryImg, so builds don't need NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+        config={{ cloud: { cloudName: 'theodorusclarence' } }}
         colors={{
           base: '#dc2626',
         }}
