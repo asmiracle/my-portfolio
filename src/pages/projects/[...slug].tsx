@@ -2,21 +2,21 @@ import { getMDXComponent } from 'mdx-bundler/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import * as React from 'react';
-import { HiLink, HiOutlineEye, HiPlay, HiUser } from 'react-icons/hi';
+import { HiLink, HiPlay, HiUser } from 'react-icons/hi';
 import { SiGithub } from 'react-icons/si';
 
 import { trackEvent } from '@/lib/analytics';
 import { getFileBySlug, getFileSlugArray } from '@/lib/mdx.server';
-import useContentMeta from '@/hooks/useContentMeta';
+// import useContentMeta from '@/hooks/useContentMeta';
 import useScrollSpy from '@/hooks/useScrollspy';
 
 import Comment from '@/components/content/Comment';
-import LikeButton from '@/components/content/LikeButton';
+// import LikeButton from '@/components/content/LikeButton';
 import MDXComponents from '@/components/content/MDXComponents';
+import ProjectBanner from '@/components/content/projects/ProjectBanner';
 import TableOfContents, {
   HeadingScrollSpy,
 } from '@/components/content/TableOfContents';
-import ProjectBanner from '@/components/content/projects/ProjectBanner';
 import Layout from '@/components/layout/Layout';
 import CustomLink from '@/components/links/CustomLink';
 import Seo from '@/components/Seo';
@@ -27,8 +27,9 @@ export default function SingleProjectPage({ code, frontmatter }: ProjectType) {
   const Component = React.useMemo(() => getMDXComponent(code), [code]);
 
   //#region  //*=========== Content Meta ===========
-  const contentSlug = `p_${frontmatter.slug.replace('|', '-')}`;
-  const meta = useContentMeta(contentSlug, { runIncrement: true });
+  // Views and likes are disabled for now
+  // const contentSlug = `p_${frontmatter.slug.replace('|', '-')}`;
+  // const meta = useContentMeta(contentSlug, { runIncrement: true });
   //#endregion  //*======== Content Meta ===========
 
   //#region  //*=========== Scrollspy ===========
@@ -73,14 +74,14 @@ export default function SingleProjectPage({ code, frontmatter }: ProjectType) {
             </p>
 
             <div className='mt-2 flex flex-wrap items-center justify-start gap-3 text-sm font-medium text-gray-600 dark:text-gray-300'>
-              <div className='flex items-center gap-1'>
+              {/* <div className='flex items-center gap-1'>
                 <HiOutlineEye className='inline-block text-base' />
                 {meta?.views?.toLocaleString() ?? '–––'} views
               </div>
               {(frontmatter.github ||
                 frontmatter.youtube ||
                 frontmatter.link) &&
-                ' - '}
+                ' - '} */}
               {frontmatter.github && (
                 <div className='inline-flex items-center gap-2'>
                   <SiGithub className='text-lg text-gray-800 dark:text-white' />
@@ -163,9 +164,9 @@ export default function SingleProjectPage({ code, frontmatter }: ProjectType) {
                     minLevel={minLevel}
                     activeSection={activeSection}
                   />
-                  <div className='flex items-center justify-center py-8'>
+                  {/* <div className='flex items-center justify-center py-8'>
                     <LikeButton slug={contentSlug} />
-                  </div>
+                  </div> */}
                 </div>
               </aside>
             </section>
